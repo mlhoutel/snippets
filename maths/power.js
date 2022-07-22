@@ -1,3 +1,5 @@
+// Exponentiation : https://en.wikipedia.org/wiki/Exponentiation
+
 const I = 12
 const N = 7
 
