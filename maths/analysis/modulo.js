@@ -6,5 +6,8 @@ const N = 34
 
 positive_modulo = (i, n) => (i % n + n) % n
 
-console.log(I % N) // -28
-console.log(positive_modulo(I, N)) // 6
+// mod = -28
+console.log("mod =", I % N)
+
+// pos = 6
+console.log("pos =", positive_modulo(I, N))

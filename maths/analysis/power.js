@@ -8,7 +8,7 @@ div = (i, n) => Math.floor(i / n) // integer division
 // O(n) power function
 pow = (i, n) => n == 0 ? 1 : i * pow(i, n-1)
 
-// O(n * log(n)) power function
+// O(log(n)) power function
 pow_opt = (i, n, DIVIDER = 2) => {
     pow_rec = (i, n) => {
         if (n == 1) return i
@@ -29,9 +29,14 @@ pow_opt = (i, n, DIVIDER = 2) => {
     return div(1, pow_rec(i, -n))       // negative pow
 }
 
+// 12^7 = 35831808
+console.log("12^7 =", pow(I, N))
 
+// 12^7 (2) = 35831808
+console.log("12^7 (2) =", pow_opt(I, N))
 
-console.log(pow(I, N))
-console.log(pow_opt(I, N))
-console.log(pow_opt(I, N, 3))
-console.log(pow_opt(I, N, 4))
+// 12^7 (3) = 35831808
+console.log("12^7 (3) =", pow_opt(I, N, 3))
+
+// 12^7 (4) = 35831808
+console.log("12^7 (4) =", pow_opt(I, N, 4))

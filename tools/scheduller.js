@@ -35,10 +35,10 @@ class Task {
 }
 
 const Policy = Object.freeze({
-    FIFO:   "FIFO",    // First In First Out
-    LIFO:   "LIFO",    // Last In First Out
-    SJF:    "SJF",     // Shortest Job First
-    RR:     "RR",      // Round Robin
+    FIFO: "FIFO",    // First In First Out
+    LIFO: "LIFO",    // Last In First Out
+    SJF: "SJF",     // Shortest Job First
+    RR: "RR",      // Round Robin
 });
 
 // Preemptive scheduller
@@ -86,7 +86,7 @@ class Scheduller {
                     task.Start()
                     this._pool.push(task)
                 }
-             } break;
+            } break;
             case Policy.RR: {
                 // Stop running tasks and move them at the end
                 for (let i in this._pool) {
@@ -120,19 +120,49 @@ class Scheduller {
         console.log(`\n________________ ${this._policy} [${this._threads} threads] ________________\n`)
 
         this._complete
-        .sort((a, b) => a.id - b.id)
-        .map((t) => {
-            console.log(`task ${t.id}: ${t.trace}`)
-        })
+            .sort((a, b) => a.id - b.id)
+            .map((t) => {
+                console.log(`task ${t.id}: ${t.trace}`)
+            })
     }
 }
 
-const FIFO = new Scheduller([ new Task(10), new Task(5), new Task(10), new Task(7)], Policy.FIFO)
-const LIFO = new Scheduller([ new Task(10), new Task(5), new Task(10), new Task(7)], Policy.LIFO)
-const SJF = new Scheduller([ new Task(10), new Task(5), new Task(10), new Task(7)], Policy.SJF)
-const RR = new Scheduller([ new Task(10), new Task(5), new Task(10), new Task(7)], Policy.RR)
+const FIFO = new Scheduller([new Task(10), new Task(5), new Task(10), new Task(7)], Policy.FIFO)
+const LIFO = new Scheduller([new Task(10), new Task(5), new Task(10), new Task(7)], Policy.LIFO)
+const SJF = new Scheduller([new Task(10), new Task(5), new Task(10), new Task(7)], Policy.SJF)
+const RR = new Scheduller([new Task(10), new Task(5), new Task(10), new Task(7)], Policy.RR)
 
 FIFO.Trace()
 LIFO.Trace()
 SJF.Trace()
 RR.Trace()
+
+/*
+________________ FIFO [1 threads] ________________
+
+task 0: ██████████                       
+task 1:           █████                  
+task 2:                ██████████        
+task 3:                          ███████ 
+
+________________ LIFO [1 threads] ________________
+
+task 0:                       ██████████ 
+task 1:                  █████           
+task 2:        ██████████                
+task 3: ███████                          
+
+________________ SJF [1 threads] ________________
+
+task 0:             ██████████           
+task 1: █████                            
+task 2:                       ██████████ 
+task 3:      ███████                     
+
+________________ RR [1 threads] ________________
+
+task 0: █   █   █   █   █   █  █  █ █ █  
+task 1:  █   █   █   █   █               
+task 2:   █   █   █   █   █  █  █  █ █ █ 
+task 3:    █   █   █   █   █  █  █       
+*/
